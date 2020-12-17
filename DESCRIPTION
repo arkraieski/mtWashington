@@ -1,0 +1,17 @@
+Package: mtWashington
+Type: Package
+Title: Mt. Washington (NH) Weather Data 2005-2020
+Version: 0.1.0
+Authors@R: person("Alex", "Kraieski", email = "arkraieski@gmail.com",
+  role = c("aut", "cre"))
+Description: A dataset aggregated from monthly F6 weather forms provided by the Mount Washington Observatory at
+    <https://www.mountwashington.org/experience-the-weather/mount-washington-weather-archives/monthly-f6.aspx>.
+    The dataset contains various daily weather measurements at the summit of Mt. Washington in New Hampshire, USA
+    from 2005 to 2020.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends: 
+    R (>= 2.10)
+Suggests: pdftools, dplyr, stringr, purrr, lubridate
+RoxygenNote: 7.1.1
