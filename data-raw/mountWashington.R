@@ -18,6 +18,8 @@ get_F6_df <- function(year, month){
   table_bottom <- if(as.integer(month) == 2L & year %% 4 != 0) 28 else which(str_detect(f6_text, "SUM")) -1
 
   pdf_table <- f6_text[10: table_bottom] %>%
+    # fix one day with missing opening parentheses in wind direction
+    str_replace(fixed("320 NW)"), "320 (NW)") %>%
     # collapse space in wind direction column
     str_replace(" \\(", "\\(") %>%
     str_replace(", ", ",") %>%
@@ -79,7 +81,8 @@ get_F6_df <- function(year, month){
                 as.numeric(str_replace(x, "T", "0.0"))
               }) %>%
     mutate(Day = mdy(paste(month, Day, year, sep = "-"))) %>%
-    rename(Date = Day)
+    rename(Date = Day) %>%
+    mutate(Avg.wind.speed = as.numeric(str_replace(Avg.wind.speed, "\\.$", "")))
   dat
 }
 
