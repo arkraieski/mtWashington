@@ -21,10 +21,10 @@ A data frame with 5705 rows and 21 variables:
   \item{\code{Trace.snow.ice.precipitation}}{logical COLUMN_DESCRIPTION}
   \item{\code{Snow.ice.onground}}{double COLUMN_DESCRIPTION}
   \item{\code{Trace.snow.ice.onground}}{logical COLUMN_DESCRIPTION}
-  \item{\code{Avg.wind.speed}}{character COLUMN_DESCRIPTION}
+  \item{\code{Avg.wind.speed}}{double COLUMN_DESCRIPTION}
   \item{\code{Fastest.wind.speed}}{integer COLUMN_DESCRIPTION}
   \item{\code{Fastest.wind.direction}}{character COLUMN_DESCRIPTION}
-  \item{\code{Total.sunshine.minutes}}{character COLUMN_DESCRIPTION}
+  \item{\code{Total.sunshine.minutes}}{integer COLUMN_DESCRIPTION}
   \item{\code{Percent.possible.sunshine.minutes}}{integer COLUMN_DESCRIPTION}
   \item{\code{Sky.cover}}{integer COLUMN_DESCRIPTION}
   \item{\code{weather.occur}}{character COLUMN_DESCRIPTION}
