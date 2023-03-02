@@ -5,8 +5,10 @@ library(purrr)
 library(lubridate)
 
 # function to download and clean a single F-6 weather form from
-# the Mt. Washington Obseratory
+# the Mt. Washington Observatory
 get_F6_df <- function(year, month){
+
+  cat("now trying", month, "/", year)
 
   m <- ifelse(str_length(as.character(month)) == 1, paste0("0", month), as.character(month))
 
@@ -15,9 +17,14 @@ get_F6_df <- function(year, month){
   f6_text <- pdf_text(url) %>%
     readr::read_lines()
 
-  table_bottom <- if(as.integer(month) == 2L & year %% 4 != 0) 28 else which(str_detect(f6_text, "SUM")) -1
+  table_top <- which(str_detect(f6_text, "^[:space:]DAY")) + 1
+  table_bottom <- if(as.integer(month) == 2L && year %% 4 != 0) table_top + 27
+    else if(as.integer(month) == 2L && year %% 4 == 0) table_top + 28
+    else which(str_detect(f6_text, "SUM")) -1
 
-  pdf_table <- f6_text[10: table_bottom] %>%
+  #table_bottom <- which(str_detect(f6_text, "SUM")) -1
+
+  pdf_table <- f6_text[table_top: table_bottom] %>%
     # fix one day with missing opening parentheses in wind direction
     str_replace(fixed("320 NW)"), "320 (NW)") %>%
     # collapse space in wind direction column
@@ -25,6 +32,8 @@ get_F6_df <- function(year, month){
     str_replace(", ", ",") %>%
     # replace all instances of multiple spaces with a single space
     str_replace_all("[:space:]{2,}"," ")
+
+  print(pdf_table)
 
   table_split <- str_split(str_trim(pdf_table), pattern = "[:blank:]")
 
